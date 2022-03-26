@@ -5,6 +5,8 @@
     <title>javaScript Game</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/lib/normalize.css">
+    <link rel="stylesheet" href="assets/lib/bootstrap/css/bootstrap.css">
+
 
 
 
@@ -14,18 +16,31 @@
             width: 100vw;
             height: 100vh;
             background-color: #2b2828;
+
+
         }
 
 
         #header{
-            margin: 0;
+           // margin: 0;
+            position: absolute;
+            color: #1c5c21;
+            top: 10%;
+            left:0;
+            right: 0;
+            margin: auto;
+            letter-spacing: 2px;
+            text-align: center;
+            font-weight: bold;
+
         }
 
         #oneSubS{
             position: absolute;
             width: 25%;
             height: 100%;
-            border: solid 1px white;
+            border-right: solid 1px #48c149;
+            background-image: linear-gradient(to bottom right, #242121, #090934);
 
 
 
@@ -36,9 +51,88 @@
             position: absolute;
             width: 50%;
             height: 100%;
-            border: solid 1px white;
+            border-right: solid 1px #48c149;
             left: 25%;
 
+
+
+        }
+
+
+        #threeSubS{
+            position: absolute;
+            width: 25%;
+            height: 100%;
+
+            left: 75%;
+
+        }
+
+
+        #buttonPack{
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            width: 80%;
+            height: 50%;
+           /* border: solid 1px white;*/
+            text-align: center;
+            z-index: 3;
+        }
+
+        #jet1{
+            position: absolute;
+            width: 70%;
+            height: 50%;
+            left: 0;
+            bottom: -3%;
+
+
+
+        }
+
+
+        #statDiv{
+            position: relative;
+            top: 10%;
+
+        }
+        #stopDiv{
+            position: relative;
+            top: 15%;
+
+        }
+
+        #resumeDiv{
+            position: relative;
+            top: 20%;
+
+        }
+
+        #btnStart{
+            background-color:transparent;
+            width: 75%;
+            height: 30% !important;
+            color: white;
+            font-weight: bold;
+
+
+        }
+
+        #btnStop{
+            background-color: transparent;
+            width: 75%;
+            font-weight: bold;
+
+        }
+
+        #btnResume{
+            background-color: transparent;
+            width: 75%;
+            font-weight: bold;
 
 
         }
@@ -53,17 +147,27 @@
 
     <section id="oneSubS">
         <h1 id="header"> FUN Shoot  </h1>
-        <div>
-            <button type="button">Start new Game</button>
+
+
+        <div id="buttonPack">
+
+            <div role="group" aria-label="Basic example" id="statDiv">
+                <button type="button" id="btnStart" class="btn btn-primary">Start new Game</button>
+            </div>
+
+            <div   role="group" aria-label="Basic example" id="stopDiv">
+                <button type=button id="btnStop" class="btn btn-primary">Stop game </button>
+            </div>
+
+            <div  role="group" aria-label="Basic example" id="resumeDiv">
+                <button type=button id="btnResume" class="btn btn-primary">Resume game </button>
+            </div>
+
         </div>
 
-        <div>
-            <button type=button>stop game </button>
-        </div>
 
-        <div>
-            <button type=button>resume game </button>
-        </div>
+        <img src="assets/images/jet2.png" id="jet1">
+
 
     </section>
 
@@ -88,5 +192,6 @@
 
 </section>
 
+<script src="assets/lib/bootstrap/js/bootstrap.bundle.js"></script>
 </body>
 </html>
