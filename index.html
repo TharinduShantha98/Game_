@@ -17,14 +17,13 @@
             height: 100vh;
             background-color: #2b2828;
 
-
         }
 
 
         #header{
            // margin: 0;
             position: absolute;
-            color: #1c5c21;
+            color: #17dbaf;
             top: 10%;
             left:0;
             right: 0;
@@ -33,7 +32,6 @@
             text-align: center;
             font-weight: bold;
             font-size: 4vw;
-
 
         }
 
@@ -45,8 +43,6 @@
             background-image: linear-gradient(to bottom right, #242121, #090934);
 
 
-
-
         }
 
         #twoSubS{
@@ -55,8 +51,6 @@
             height: 100%;
             border-right: solid 1px #48c149;
             left: 25%;
-
-
 
         }
 
@@ -115,14 +109,16 @@
         #btnStart{
             background-color:transparent;
             width: 75%;
-            height: 30% !important;
+            height: 7vh !important;
             color: white;
             font-weight: bold;
+
         }
 
         #btnStop{
             background-color: transparent;
             width: 75%;
+            height: 7vh !important;
             font-weight: bold;
 
         }
@@ -130,6 +126,7 @@
         #btnResume{
             background-color: transparent;
             width: 75%;
+            height: 7vh !important;
             font-weight: bold;
         }
 
@@ -186,6 +183,13 @@
             display: flex;
             flex-wrap: wrap;
             top: 24%;
+            left: 0;
+            right: 0;
+            margin: auto;
+            text-align: center;
+            justify-content: center;
+
+
 
         }
 
@@ -197,8 +201,54 @@
             text-align: center;
             line-height: 75px;
             font-size: 30px;
+            border-radius: 5%;
         }
 
+
+        #logoImage{
+            width: 50%;
+            height: 23%;
+
+
+        }
+
+
+        #gameMainGround{
+            position:absolute;
+            width: 100%;
+            height: 300%;
+            bottom: 0;
+            border: solid 1px rgba(184,33,138,0.67);
+
+        }
+
+
+        #oneGround{
+            position: absolute;
+            height:  calc((100% / 3) * 1);
+            width: 100%;
+            background-color: #6a1a21;
+
+        }
+
+
+        #twoGround{
+            position: absolute;
+            height:  calc((100% / 3) * 1);
+            width: 100%;
+            top: calc((100% / 3) * 1);
+            background-color: crimson;
+
+        }
+
+        #threeGround{
+            position: absolute;
+            height:  calc((100% / 3) * 1);
+            width: 100%;
+            top: calc((100% / 3) * 2);
+            background-color: #544fd7;
+
+        }
 
 
 
@@ -229,6 +279,7 @@
 
     <section id="oneSubS">
         <h1 id="header"> FUN Shoot  </h1>
+        <img src="assets/images/logo.png" id="logoImage">
 
 
         <div id="buttonPack">
@@ -256,6 +307,36 @@
 
 
     <section id="twoSubS">
+
+        <section id="gameMainGround">
+            <div id="oneGround">
+                <div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+
+            </div>
+
+            <div id="twoGround">
+
+
+            </div>
+
+            <div id="threeGround">
+
+
+            </div>
+
+        </section>
+
+
+
+
+
+
 
 
     </section>
