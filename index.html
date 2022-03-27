@@ -32,6 +32,8 @@
             letter-spacing: 2px;
             text-align: center;
             font-weight: bold;
+            font-size: 4vw;
+
 
         }
 
@@ -63,8 +65,8 @@
             position: absolute;
             width: 25%;
             height: 100%;
-
             left: 75%;
+            background-image: linear-gradient(to bottom right, #242121, #090934);
 
         }
 
@@ -86,11 +88,9 @@
         #jet1{
             position: absolute;
             width: 70%;
-            height: 50%;
+            height: 48%;
             left: 0;
-            bottom: -3%;
-
-
+            bottom: 0;
 
         }
 
@@ -118,8 +118,6 @@
             height: 30% !important;
             color: white;
             font-weight: bold;
-
-
         }
 
         #btnStop{
@@ -133,9 +131,93 @@
             background-color: transparent;
             width: 75%;
             font-weight: bold;
+        }
 
+
+
+        #labelDiv{
+            width: 100%;
+            height: 75%;
+            border: solid 1px white;
+        }
+
+
+        #lblScore{
+            color: white;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            text-align: center;
+            font-size: 3vw;
+            font-weight: bold;
 
         }
+
+
+        #lblScoreNum{
+            color: white;
+            position: absolute;
+            top: 10%;
+            left: 0;
+            right: 0;
+            margin: auto;
+            text-align: center;
+
+        }
+
+
+        #lblStage{
+            color: white;
+            position: absolute;
+            top: 14%;
+            left: 0;
+            right: 0;
+            margin: auto;
+            text-align: center;
+            font-size: 3vw;
+            font-weight: bold;
+
+        }
+
+        #stageDiv{
+            position: absolute;
+            display: flex;
+            flex-wrap: wrap;
+            top: 24%;
+
+        }
+
+
+        #stageDiv>div{
+            background-color: #f1f1f1;
+            width: 100px;
+            margin: 10px;
+            text-align: center;
+            line-height: 75px;
+            font-size: 30px;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     </style>
 
@@ -181,10 +263,29 @@
 
 
     <section id="threeSubS">
-        <label>score</label>
-        <lable>15000</lable>
-        <label>Stage </label>
-        <label>01</label>
+        <div id="labelDiv">
+            <label id="lblScore">Score</label>
+            <lable id="lblScoreNum">15000</lable>
+            <label id="lblStage">Stage </label>
+            <div id="stageDiv">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+                <div>7</div>
+                <div>8</div>
+                <div>9</div>
+                <div>9</div>
+                <div>10</div>
+                <div>11</div>
+            </div>
+
+
+
+        </div>
+
 
 
     </section>
