@@ -51,6 +51,7 @@
             height: 100%;
             border-right: solid 1px #48c149;
             left: 25%;
+            overflow-y: scroll;
 
         }
 
@@ -220,6 +221,7 @@
           /*  bottom: 0;*/
             border: solid 1px rgba(184,33,138,0.67);
 
+
         }
 
 
@@ -294,6 +296,40 @@
             /*background-color: #48c149;*/
 
         }
+
+
+
+        #shootingGround{
+            position: fixed;
+            width: 50%;
+            height: calc((100% / 5) * 2 );
+            border: solid 1px chocolate;
+            top: calc((100%/5)*3 );
+
+
+        }
+
+        .shootingRow{
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            height: 50%;
+
+        }
+
+        #myJet{
+            position: absolute;
+            width: 20%;
+            height: 100%;
+
+
+        }
+
+
+
+
+
 
 
 
@@ -397,9 +433,6 @@
 
             </div>
 
-
-
-
             <div id="twoGround">
                 <div class="oneGroundRow1">
                     <div class="rowDiv"></div>
@@ -476,8 +509,31 @@
                     <div class="rowDiv"></div>
                     <div class="rowDiv"></div>
                 </div>
+            </div>
+
+           <!-- shooting ground-->
+
+            <div id="shootingGround">
+                <div class="shootingRow">
+                    <div class="rowDiv"></div>
+                    <div class="rowDiv"></div>
+                    <div class="rowDiv"></div>
+                    <div class="rowDiv"></div>
+                    <div class="rowDiv"></div>
+                </div>
+
+                <div class="shootingRow">
+                    <div class="rowDiv"></div>
+                    <div class="rowDiv">
+                        <img src="assets/images/jet4.png" id="myJet">
+                    </div>
+                    <div class="rowDiv"></div>
+                    <div class="rowDiv"></div>
+                    <div class="rowDiv"></div>
+                </div>
 
             </div>
+
 
         </section>
 
