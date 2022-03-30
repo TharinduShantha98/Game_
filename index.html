@@ -51,8 +51,15 @@
             height: 100%;
             border-right: solid 1px #48c149;
             left: 25%;
-            overflow-y: scroll;
+           /* overflow-y: scroll;*/
 
+        }
+
+
+
+        #game{
+            width: 100%;
+            height: 100%;
         }
 
 
@@ -214,11 +221,11 @@
         }
 
 
-        #gameMainGround{
+       /* #gameMainGround{
             position:absolute;
             width: 100%;
             height: 300%;
-          /*  bottom: 0;*/
+          !*  bottom: 0;*!
             border: solid 1px rgba(184,33,138,0.67);
 
 
@@ -247,12 +254,12 @@
 
 
         .oneGroundRow1{
-           /* position: absolute;*/
+           !* position: absolute;*!
             display: flex;
             flex-direction: row;
             width: 100%;
             height: 20%;
-            /*background-color: #48c149;*/
+            !*background-color: #48c149;*!
 
         }
 
@@ -277,23 +284,23 @@
         }
 
         .twoGroundRow2{
-            /* position: absolute;*/
+            !* position: absolute;*!
             display: flex;
             flex-direction: row;
             width: 100%;
             height: 20%;
-            /*background-color: #48c149;*/
+            !*background-color: #48c149;*!
 
         }
 
 
         .threeGroundRow3{
-            /* position: absolute;*/
+            !* position: absolute;*!
             display: flex;
             flex-direction: row;
             width: 100%;
             height: 20%;
-            /*background-color: #48c149;*/
+            !*background-color: #48c149;*!
 
         }
 
@@ -327,7 +334,7 @@
         }
 
 
-
+*/
 
 
 
@@ -389,7 +396,7 @@
 
     <section id="twoSubS">
 
-        <section id="gameMainGround">
+       <!-- <section id="gameMainGround">
             <div id="oneGround">
                 <div class="twoGroundRow2">
                     <div class="rowDiv"></div>
@@ -511,7 +518,7 @@
                 </div>
             </div>
 
-           <!-- shooting ground-->
+           &lt;!&ndash; shooting ground&ndash;&gt;
 
             <div id="shootingGround">
                 <div class="shootingRow">
@@ -536,7 +543,11 @@
 
 
         </section>
+-->
 
+        <canvas id="game">
+           <!-- <img src="assets/images/jet4.png">-->
+        </canvas>
 
 
 
@@ -580,5 +591,48 @@
 </section>
 
 <script src="assets/lib/bootstrap/js/bootstrap.bundle.js"></script>
+<script src="assets/lib/jquery/jquery-3.6.0.min.js"></script>
+<script>
+
+  /*  let jet  =  $("#myJet");*/
+
+
+    const  canvas =  document.getElementById("game");
+    const ctx  =  canvas.getContext("2d");
+
+
+    function gameLoop() {
+        setCommonStyle();
+        ctx.fillStyle = "black";
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    }
+
+
+  function setCommonStyle(){
+      ctx.shadowColor = "#d53";
+      ctx.shadowBlur = 20;
+      ctx.lineJoin = "bevel";
+      ctx.lineWidth = 5;
+
+
+  }
+
+
+    setInterval(gameLoop,100/60);
+
+
+
+
+
+/*============================player jet ===========================*/
+
+
+
+
+
+
+
+</script>
 </body>
 </html>
