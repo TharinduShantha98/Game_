@@ -552,9 +552,6 @@
 
 
 
-
-
-
     </section>
 
 
@@ -594,26 +591,119 @@
 <script src="assets/lib/jquery/jquery-3.6.0.min.js"></script>
 <script>
 
-  /*  let jet  =  $("#myJet");*/
+
+
+    /*============================player jet ===========================*/
+
+    class Player{
+        constructor(x,y) {
+            this.x  = x;
+            this.y =  y;
+
+            this.width  = 40;
+            this.height  = 20;
+            this.speed  = 1;
+
+            document.addEventListener("keydown",this.keydown);
+            document.addEventListener("keyup",this.keyup);
+
+
+        }
+
+
+        drawPlayer(ctx){
+            this.move();
+            ctx.strokeStyle = "yellow";
+            ctx.fillStyle = "black";
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+            ctx.strokeRect(this.x,this.y,this.width,this.height);
+
+
+        }
+
+        move(){
+            if(this.downPressed){
+                this.y += this.speed;
+            }
+
+            if(this.upPressed){
+                this.y -= this.speed;
+            }
+
+            if(this.leftPressed){
+                this.x -= this.speed;
+            }
+
+            if(this.rightPressed){
+                this.x += this.speed;
+            }
+
+        }
+
+
+
+
+        keydown =(e)=>{
+            if(e.code == "ArrowUp" ){
+                this.upPressed = true;
+            }
+            if(e.code == "ArrowDown" ){
+                this.downPressed = true;
+            }
+            if(e.code == "ArrowLeft" ){
+                this.leftPressed = true;
+            }
+            if(e.code == "ArrowRight" ){
+                this.rightPressed = true;
+            }
+
+
+        }
+
+
+        keyup =(e)=>{
+            if(e.code == "ArrowUp" ){
+                this.upPressed = false;
+            }
+            if(e.code == "ArrowDown" ){
+                this.downPressed = false;
+            }
+            if(e.code == "ArrowLeft" ){
+                this.leftPressed = false;
+            }
+            if(e.code == "ArrowRight" ){
+                this.rightPressed = false;
+            }
+        }
+
+
+
+
+
+    }
+
+
+    /*  let jet  =  $("#myJet");*/
 
 
     const  canvas =  document.getElementById("game");
     const ctx  =  canvas.getContext("2d");
+    let player  = new Player(canvas.width/2.2,canvas.height/1.4);
 
 
     function gameLoop() {
         setCommonStyle();
         ctx.fillStyle = "black";
         ctx.fillRect(0,0,canvas.width,canvas.height);
+        player.drawPlayer(ctx);
 
     }
 
 
   function setCommonStyle(){
-      ctx.shadowColor = "#d53";
-      ctx.shadowBlur = 20;
-      ctx.lineJoin = "bevel";
-      ctx.lineWidth = 5;
+      ctx.shadowColor = "#cb6b53";
+      ctx.shadowBlur = 5;
+
 
 
   }
@@ -622,10 +712,6 @@
     setInterval(gameLoop,100/60);
 
 
-
-
-
-/*============================player jet ===========================*/
 
 
 
