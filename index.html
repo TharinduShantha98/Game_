@@ -700,7 +700,7 @@
 
 
     class CreatePlayer{
-        constructor(x,y,image) {
+        constructor(x,y,image ,cw, ch) {
 
             this.x  = 130;
             this.y =  100;
@@ -709,9 +709,14 @@
             this.height  = 40;
             this.speed  = 1;
 
+
+            this.canWidth = cw;
+            this.canHeight = ch;
+
+
+
             document.addEventListener("keydown",this.keydown);
             document.addEventListener("keyup",this.keyup);
-
 
         }
 
@@ -728,19 +733,34 @@
 
         move(){
             if(this.downPressed){
-                this.y += this.speed;
+                if(this.canHeight >this.y + this.height ){
+                    this.y += this.speed;
+
+                }
+
             }
 
             if(this.upPressed){
-                this.y -= this.speed;
+                if(0 < this.y){
+                    this.y -= this.speed;
+                }
+
             }
 
             if(this.leftPressed){
-                this.x -= this.speed;
+                if(0< this.x){
+                    this.x -= this.speed;
+                }
+
             }
 
             if(this.rightPressed){
-                this.x += this.speed;
+                console.log("ca" + this.canWidth);
+                console.log(this.x);
+                if(this.canWidth > this.x +this.width ){
+                    this.x += this.speed;
+                }
+
             }
 
         }
@@ -803,7 +823,7 @@
 
     const image =  new Image(10,20);
     image.src = 'assets/images/jet3.png';
-    let player2 =  new CreatePlayer(canvas.width/2.2,canvas.height/1.4,image);
+    let player2 =  new CreatePlayer(canvas.width/2.2,canvas.height/1.4,image, canvas.width, canvas.height);
 
 
 
@@ -819,8 +839,8 @@
     }
 
   function setCommonStyle(){
-      ctx.shadowColor = "#cb6b53";
-      ctx.shadowBlur = 5;
+      ctx.shadowColor = "#d9846f";
+      ctx.shadowBlur = 2;
 
 
 
