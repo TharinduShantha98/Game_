@@ -693,6 +693,20 @@
 
 
     }
+/*    =======================createBulletController====================*/
+
+    class BulletController{
+
+        constructor(canvas) {
+            this.canvas = canvas;
+        }
+
+        shoot(){
+
+        }
+
+    }
+
 
 
 
@@ -700,7 +714,7 @@
 
 
     class CreatePlayer{
-        constructor(x,y,image ,cw, ch) {
+        constructor(x,y,image ,cw, ch, bulletController) {
 
             this.x  = 130;
             this.y =  100;
@@ -712,7 +726,7 @@
 
             this.canWidth = cw;
             this.canHeight = ch;
-
+            this.bulletController  =  bulletController;
 
 
             document.addEventListener("keydown",this.keydown);
@@ -726,8 +740,23 @@
         drawImage(){
             this.move();
             ctx.drawImage(image,this.x,this.y, this.width, this.height);
+            this.shoot();
+
+        }
 
 
+        shoot(){
+            if(this.shootPressed){
+                console.log("shoot");
+                let speed  =  5;
+                let delay = 7;
+                let damage  = 1;
+                let bulletX  =  this.x + this.width/2;
+                let bulletY =  this.y;
+                this.bulletController.shoot(bulletX,bulletY,speed,damage,delay);
+
+
+            }
         }
 
 
@@ -782,6 +811,10 @@
                 this.rightPressed = true;
             }
 
+            if(e.code == "Space"){
+                this.shootPressed = true;
+            }
+
 
         }
 
@@ -798,6 +831,10 @@
             }
             if(e.code == "ArrowRight" ){
                 this.rightPressed = false;
+            }
+
+            if(e.code == "Space"){
+                this.shootPressed = false;
             }
         }
 
@@ -821,9 +858,11 @@
 
     let player  = new Player(canvas.width/2.2,canvas.height/1.4);
 
+    let bulletController =  new BulletController(canvas);
+
     const image =  new Image(10,20);
     image.src = 'assets/images/jet3.png';
-    let player2 =  new CreatePlayer(canvas.width/2.2,canvas.height/1.4,image, canvas.width, canvas.height);
+    let player2 =  new CreatePlayer(canvas.width/2.2,canvas.height/1.4,image, canvas.width, canvas.height, bulletController);
 
 
 
