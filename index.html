@@ -693,16 +693,75 @@
 
 
     }
+
+    /*============================Bullet================================*/
+    class Bullet{
+
+        constructor(x,y, speed, damage ) {
+            this.x =  x;
+            this.y = y;
+            this.speed =  speed;
+            this.damage  =  damage;
+
+
+            this.width  =  5;
+            this.height  =  15;
+            this.color = "red";
+
+        }
+
+
+
+        draw(ctx){
+            ctx.fillStyle =  this.color;
+            this.y -= this.speed;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+
+
+
+        }
+
+    }
+
+
+
+
+
+
+
 /*    =======================createBulletController====================*/
 
     class BulletController{
+        bullets  = [];
+        timerTillNextBullet = 0;
 
-        constructor(canvas) {
+        constructor(canvas ,ctx) {
             this.canvas = canvas;
+            this.ctx = ctx;
         }
 
-        shoot(){
+        shoot(x, y, speed , damage, delay){
+            console.log("2ndShoot");
 
+            if(this.timerTillNextBullet <= 0){
+                console.log("3ndShoot");
+
+                this.bullets.push( new Bullet(x, y, speed, damage));
+                this.timerTillNextBullet  =  delay;
+            }
+            this.timerTillNextBullet--;
+
+            this.draw(this.ctx);
+
+        }
+
+
+        draw(ctx){
+
+           console.log(this.bullets.length);
+           this.bullets.forEach((bullet) =>{
+               bullet.draw(ctx);
+           })
         }
 
     }
@@ -748,12 +807,13 @@
         shoot(){
             if(this.shootPressed){
                 console.log("shoot");
-                let speed  =  5;
-                let delay = 7;
+                let speed  =  3;
+                let delay = 15;
                 let damage  = 1;
                 let bulletX  =  this.x + this.width/2;
                 let bulletY =  this.y;
                 this.bulletController.shoot(bulletX,bulletY,speed,damage,delay);
+
 
 
             }
@@ -858,7 +918,7 @@
 
     let player  = new Player(canvas.width/2.2,canvas.height/1.4);
 
-    let bulletController =  new BulletController(canvas);
+    let bulletController =  new BulletController(canvas, ctx);
 
     const image =  new Image(10,20);
     image.src = 'assets/images/jet3.png';
