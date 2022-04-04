@@ -705,7 +705,7 @@
 
 
             this.width  =  5;
-            this.height  =  15;
+            this.height  =  5;
             this.color = "red";
 
         }
@@ -717,13 +717,126 @@
             this.y -= this.speed;
             ctx.fillRect(this.x, this.y, this.width, this.height);
 
-
-
         }
 
     }
 
+    /*============================ End Bullet================================*/
 
+
+    /*============================Start Enemy ================================*/
+
+    class Enemy{
+        constructor(x, y, color, health, speed , canvas) {
+            this.x  =  x;
+            this.y  =  y;
+            this.color = color;
+            this.health  =  health;
+            this.width  =  20;
+            this.height  =  10;
+            this.canvas =  canvas;
+            this.speed  = speed;
+            this.img  = new Image(this.width, this.height);
+
+        }
+
+        init(){
+            this.img.src = "assets/images/enemy.png";
+
+        }
+
+
+        draw(ctx){
+            this.init();
+
+            const  id  =  setInterval(()=> {
+
+                ctx.fillStyle  =  this.color;
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+                this.y += 0.1;
+                this.x += 0.1
+
+
+
+
+
+
+
+
+
+
+
+
+
+                ;
+
+                if(this.y === this.canvas.height){
+                    this.y  = 0;
+
+
+                }
+
+            },400);
+
+
+
+
+
+          /*  ctx.strokeRect(this.x, this.y, this.width, this.height);*/
+
+
+
+
+
+
+
+           /* if(this.health > 1){
+                ctx.strokeStyle = "white";
+            }else{
+                ctx.strokeStyle = this.color;
+            }
+*/
+          /*  ctx.drawImage(this.img,this.x,this.y, this.width, this.height);*/
+
+
+
+
+
+
+
+            //Draw Text
+        /*    ctx.fillStyle = "black";
+            ctx.font = "7px Arial";
+            ctx.fillText(
+                this.health,
+                this.x + this.width / 3.5,
+                this.y + this.height / 1.5
+            );
+*/
+
+
+
+        }
+
+
+
+
+
+        damage(damage){
+            this.health -= damage;
+
+        }
+
+
+
+
+
+
+
+
+
+
+    }
 
 
 
@@ -750,8 +863,8 @@
                 this.timerTillNextBullet  =  delay;
             }
             this.timerTillNextBullet--;
-
             this.draw(this.ctx);
+
 
         }
 
@@ -762,7 +875,11 @@
            this.bullets.forEach((bullet) =>{
                bullet.draw(ctx);
            })
+
+
+
         }
+
 
     }
 
@@ -807,11 +924,11 @@
         shoot(){
             if(this.shootPressed){
                 console.log("shoot");
-                let speed  =  3;
-                let delay = 15;
+                let speed  =  1;
+                let delay = 40;
                 let damage  = 1;
-                let bulletX  =  this.x + this.width/2;
-                let bulletY =  this.y;
+                let bulletX  =  this.x + this.width/2 -2 ;
+                let bulletY =  this.y - 10;
                 this.bulletController.shoot(bulletX,bulletY,speed,damage,delay);
 
 
@@ -824,23 +941,19 @@
             if(this.downPressed){
                 if(this.canHeight >this.y + this.height ){
                     this.y += this.speed;
-
                 }
-
             }
 
             if(this.upPressed){
                 if(0 < this.y){
                     this.y -= this.speed;
                 }
-
             }
 
             if(this.leftPressed){
                 if(0< this.x){
                     this.x -= this.speed;
                 }
-
             }
 
             if(this.rightPressed){
@@ -903,7 +1016,7 @@
 
 
 
-
+/*================================main ======================*/
 
 
 
@@ -912,30 +1025,37 @@
 
     const  canvas =  document.getElementById("game");
     const ctx  =  canvas.getContext("2d");
-   /* const image = document.getElementById('source');*/
-
 
 
     let player  = new Player(canvas.width/2.2,canvas.height/1.4);
 
     let bulletController =  new BulletController(canvas, ctx);
-
     const image =  new Image(10,20);
     image.src = 'assets/images/jet3.png';
     let player2 =  new CreatePlayer(canvas.width/2.2,canvas.height/1.4,image, canvas.width, canvas.height, bulletController);
+    let enemy  =  new Enemy(10, 10, "yellow",10,);
 
 
 
     function gameLoop() {
-        setCommonStyle();
+
         ctx.fillStyle = "black";
         ctx.fillRect(0,0,canvas.width,canvas.height);
         player2.drawImage(ctx);
-
-
+        enemy.draw(ctx);
 
 
     }
+
+
+
+
+
+
+
+
+
+
 
   function setCommonStyle(){
       ctx.shadowColor = "#d9846f";
