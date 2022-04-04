@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>javaScript Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/lib/normalize.css">
+    <link rel="stylesheet" href="assets/lib/bootstrap/css/bootstrap.css">
+
+
+
+
+
+    <style>
+        #mainS{
+            width: 100vw;
+            height: 100vh;
+            background-color: #2b2828;
+
+        }
+
+
+        #header{
+        // margin: 0;
+            position: absolute;
+            color: #17dbaf;
+            top: 10%;
+            left:0;
+            right: 0;
+            margin: auto;
+            letter-spacing: 2px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 4vw;
+
+        }
+
+        #oneSubS{
+            position: absolute;
+            width: 25%;
+            height: 100%;
+            border-right: solid 1px #48c149;
+            background-image: linear-gradient(to bottom right, #242121, #090934);
+
+
+        }
+
+        #twoSubS{
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            border-right: solid 1px #48c149;
+            left: 25%;
+            /* overflow-y: scroll;*/
+
+        }
+
+
+
+        #game{
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            overflow: hidden;
+        }
+
+
+        #threeSubS{
+            position: absolute;
+            width: 25%;
+            height: 100%;
+            left: 75%;
+            background-image: linear-gradient(to bottom right, #242121, #090934);
+
+        }
+
+
+        #buttonPack{
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            width: 80%;
+            height: 50%;
+            /* border: solid 1px white;*/
+            text-align: center;
+            z-index: 3;
+        }
+
+        #jet1{
+            position: absolute;
+            width: 70%;
+            height: 48%;
+            left: 0;
+            bottom: 0;
+
+        }
+
+
+        #statDiv{
+            position: relative;
+            top: 10%;
+
+        }
+        #stopDiv{
+            position: relative;
+            top: 15%;
+
+        }
+
+        #resumeDiv{
+            position: relative;
+            top: 20%;
+
+        }
+
+        #btnStart{
+            background-color:transparent;
+            width: 75%;
+            height: 7vh !important;
+            color: white;
+            font-weight: bold;
+
+        }
+
+        #btnStop{
+            background-color: transparent;
+            width: 75%;
+            height: 7vh !important;
+            font-weight: bold;
+
+        }
+
+        #btnResume{
+            background-color: transparent;
+            width: 75%;
+            height: 7vh !important;
+            font-weight: bold;
+        }
+
+
+
+        #labelDiv{
+            width: 100%;
+            height: 100%;
+            border: solid 1px white;
+        }
+
+
+        #lblScore{
+            color: white;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            text-align: center;
+            font-size: 3vw;
+            font-weight: bold;
+
+        }
+
+
+        #lblScoreNum{
+            color: white;
+            position: absolute;
+            top: 10%;
+            left: 0;
+            right: 0;
+            margin: auto;
+            text-align: center;
+
+        }
+
+
+        #lblStage{
+            color: white;
+            position: absolute;
+            top: 14%;
+            left: 0;
+            right: 0;
+            margin: auto;
+            text-align: center;
+            font-size: 3vw;
+            font-weight: bold;
+
+        }
+
+        #stageDiv{
+            position: absolute;
+            display: flex;
+            flex-wrap: wrap;
+            top: 24%;
+            left: 0;
+            right: 0;
+            margin: auto;
+            text-align: center;
+            justify-content: center;
+
+
+
+        }
+
+
+        #stageDiv>div{
+            background-color: #f1f1f1;
+            width: 80px;
+            margin: 10px;
+            text-align: center;
+            line-height: 75px;
+            font-size: 30px;
+            border-radius: 5%;
+        }
+
+
+        #logoImage{
+            width: 50%;
+            height: 23%;
+
+
+
+
+        }
+
+
+        #source{
+            position:  absolute;
+            width: 12%;
+            height: 12%;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+
+        }
+
+
+        /* #gameMainGround{
+             position:absolute;
+             width: 100%;
+             height: 300%;
+           !*  bottom: 0;*!
+             border: solid 1px rgba(184,33,138,0.67);
+
+
+         }
+
+
+
+
+         #threeGround{
+             position: absolute;
+             height:  calc((100% / 3) * 1);
+             width: 100%;
+             top: calc((100% / 3) * 2);
+             background-color: #544fd7;
+
+         }
+
+         #oneGround{
+             position: absolute;
+             height:  calc((100% / 3) * 1);
+             width: 100%;
+             background-color: #6a1a21;
+             flex-direction: row;
+
+         }
+
+
+         .oneGroundRow1{
+            !* position: absolute;*!
+             display: flex;
+             flex-direction: row;
+             width: 100%;
+             height: 20%;
+             !*background-color: #48c149;*!
+
+         }
+
+
+         .rowDiv{
+             width: 20%;
+             height: 100%;
+             box-sizing: border-box;
+             border: solid 1px black;
+
+         }
+
+
+
+         #twoGround{
+             position: absolute;
+             height:  calc((100% / 3) * 1);
+             width: 100%;
+             top: calc((100% / 3) * 1);
+             background-color: crimson;
+
+         }
+
+         .twoGroundRow2{
+             !* position: absolute;*!
+             display: flex;
+             flex-direction: row;
+             width: 100%;
+             height: 20%;
+             !*background-color: #48c149;*!
+
+         }
+
+
+         .threeGroundRow3{
+             !* position: absolute;*!
+             display: flex;
+             flex-direction: row;
+             width: 100%;
+             height: 20%;
+             !*background-color: #48c149;*!
+
+         }
+
+
+
+         #shootingGround{
+             position: fixed;
+             width: 50%;
+             height: calc((100% / 5) * 2 );
+             border: solid 1px chocolate;
+             top: calc((100%/5)*3 );
+
+
+         }
+
+         .shootingRow{
+             position: relative;
+             display: flex;
+             flex-direction: row;
+             width: 100%;
+             height: 50%;
+
+         }
+
+         #myJet{
+             position: absolute;
+             width: 20%;
+             height: 100%;
+
+
+         }
+
+
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </style>
+
+</head>
+
+<body>
+
+<section id="mainS">
+
+    <section id="oneSubS">
+        <h1 id="header"> FUN Shoot  </h1>
+        <img src="assets/images/logo.png" id="logoImage">
+
+
+        <div id="buttonPack">
+
+            <div role="group" aria-label="Basic example" id="statDiv">
+                <button type="button" id="btnStart" class="btn btn-primary">Start new Game</button>
+            </div>
+
+            <div   role="group" aria-label="Basic example" id="stopDiv">
+                <button type=button id="btnStop" class="btn btn-primary">Stop game </button>
+            </div>
+
+            <div  role="group" aria-label="Basic example" id="resumeDiv">
+                <button type=button id="btnResume" class="btn btn-primary">Resume game </button>
+            </div>
+
+        </div>
+
+
+        <img src="assets/images/jet2.png" id="jet1">
+
+
+    </section>
+
+
+
+    <section id="twoSubS">
+
+        <!-- <section id="gameMainGround">
+             <div id="oneGround">
+                 <div class="twoGroundRow2">
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                 </div>
+
+                 <div class="twoGroundRow2">
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                 </div>
+
+                 <div class="twoGroundRow2">
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                 </div>
+
+                 <div class="twoGroundRow2">
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                 </div>
+
+                 <div class="twoGroundRow2">
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                 </div>
+
+             </div>
+
+             <div id="twoGround">
+                 <div class="oneGroundRow1">
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                 </div>
+                 <div class="oneGroundRow1">
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                 </div>
+                 <div class="oneGroundRow1">
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                 </div>
+                 <div class="oneGroundRow1">
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                 </div>
+                 <div class="oneGroundRow1">
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                 </div>
+
+
+             </div>
+
+             <div id="threeGround">
+                 <div class="threeGroundRow3">
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                 </div>
+                 <div class="threeGroundRow3">
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                 </div>
+                 <div class="threeGroundRow3">
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                 </div>
+                 <div class="threeGroundRow3">
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                 </div>
+                 <div class="threeGroundRow3">
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                 </div>
+             </div>
+
+            &lt;!&ndash; shooting ground&ndash;&gt;
+
+             <div id="shootingGround">
+                 <div class="shootingRow">
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                 </div>
+
+                 <div class="shootingRow">
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv">
+                         <img src="assets/images/jet4.png" id="myJet">
+                     </div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                     <div class="rowDiv"></div>
+                 </div>
+
+             </div>
+
+
+         </section>
+ -->
+
+        <div id="game">
+
+             <img id="source"
+                  src="assets/images/jet3.png">
+
+
+        </div>
+
+
+
+
+
+
+    </section>
+
+
+
+    <section id="threeSubS">
+        <div id="labelDiv">
+            <label id="lblScore">Score</label>
+            <lable id="lblScoreNum">15000</lable>
+            <label id="lblStage">Stage </label>
+            <div id="stageDiv">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+                <div>7</div>
+                <div>8</div>
+                <div>9</div>
+                <div>10</div>
+                <div>11</div>
+                <div>12</div>
+            </div>
+
+
+
+        </div>
+
+
+
+    </section>
+
+
+</section>
+<script src="assets/lib/bootstrap/js/bootstrap.bundle.js"></script>
+<script src="assets/lib/jquery/jquery-3.6.0.min.js"></script>
+
+<script>
+
+
+
+
+    class  BulletController{
+        bullets = [];
+
+        constructor() {
+        }
+
+
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    class Player{
+        constructor(x,y, groundH, groundW, img) {
+            this.x =  x;
+            this.y =  y;
+            this.speed  =  1;
+            this.gh = groundH;
+            this.gw = groundW;
+            this.img  =  img;
+
+            document.addEventListener("keydown",this.keydown);
+            document.addEventListener("keyup",this.keyup);
+
+
+
+        }
+
+
+
+        shoot(){
+
+
+
+
+        }
+
+
+
+
+
+
+       /* create_player(){
+                $("#source").css()
+
+
+
+
+        }
+*/
+
+        move(){
+            if(this.downPressed){
+                this.y += this.speed;
+                if(this.gh > this.y + 80){
+                    $(this.img).css("top", this.y);
+
+                }
+            }
+
+            if(this.upPressed){
+                if(-this.gh <= this.y - 80){
+                    console.log("up" + this.y);
+                    this.y -= this.speed;
+                    $(this.img).css("top", this.y);
+                }
+            }
+
+            if(this.leftPressed){
+                if(-this.gw  < this.x -100){
+                    this.x -= this.speed;
+                    $(this.img).css("left", this.x);
+                }
+            }
+
+            if(this.rightPressed){
+                console.log("ca" + this.gw);
+                console.log(this.x);
+                this.x += this.speed;
+                if(this.gw > this.x + 100){
+
+                    $(this.img).css("left", this.x);
+                }
+
+            }
+
+        }
+
+
+
+
+        keydown =(e)=>{
+            if(e.code == "ArrowUp" ){
+                this.upPressed = true;
+            }
+            if(e.code == "ArrowDown" ){
+                this.downPressed = true;
+            }
+            if(e.code == "ArrowLeft" ){
+                this.leftPressed = true;
+            }
+            if(e.code == "ArrowRight" ){
+                this.rightPressed = true;
+            }
+
+            if(e.code == "Space"){
+                this.shootPressed = true;
+            }
+
+
+        }
+
+
+        keyup =(e)=>{
+            if(e.code == "ArrowUp" ){
+                this.upPressed = false;
+            }
+            if(e.code == "ArrowDown" ){
+                this.downPressed = false;
+            }
+            if(e.code == "ArrowLeft" ){
+                this.leftPressed = false;
+            }
+            if(e.code == "ArrowRight" ){
+                this.rightPressed = false;
+            }
+
+            if(e.code == "Space"){
+                this.shootPressed = false;
+            }
+        }
+
+    }
+
+
+
+
+
+
+
+    const playground  = $("#game");
+    const img  =  $("#source");
+    const pos  =  img.position();
+
+    console.log("con"+ pos.left);
+    console.log("con"+ pos.top);
+
+
+    const playGroundWidth  =  playground.width();
+    const playGroundHeight  =  playground.height();
+
+    const player  =  new Player(pos.left, pos.top ,playGroundHeight,playGroundWidth,"#source");
+
+
+
+
+    function gameLoop() {
+        player.move();
+
+    }
+
+
+    setInterval(gameLoop, 100/60);
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+</body>
+</html>

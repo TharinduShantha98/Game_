@@ -749,32 +749,21 @@
         draw(ctx){
             this.init();
 
-            const  id  =  setInterval(()=> {
 
+
+            const  id  =  setInterval(()=> {
                 ctx.fillStyle  =  this.color;
                 ctx.fillRect(this.x, this.y, this.width, this.height);
-                this.y += 0.1;
-                this.x += 0.1
+                /*this.y += 0.01;
+                this.x += 0.01;*/
 
-
-
-
-
-
-
-
-
-
-
-
-
-                ;
-
-                if(this.y === this.canvas.height){
+                if(this.y - 20 === this.canvas.height){
+                    /*   clearInterval(id);*/
                     this.y  = 0;
 
-
                 }
+
+
 
             },400);
 
@@ -1046,6 +1035,8 @@
 
 
     }
+
+
 
 
 
