@@ -443,7 +443,7 @@
 
     /*============================Start Enemy ================================*/
         class Enemy{
-            constructor(x,y, speed, health) {
+            constructor(x,y, speed, health, canvas) {
                 this.x  =x;
                 this.y  = y;
                 this.speed  =  speed;
@@ -463,9 +463,15 @@
                 ctx.fillRect(this.x, this.y, this.width, this.health);
 
                 this.y = this.y + this.speed;
+                console.log(this.y);
+                console.log(this.heigth);
+                console.log(canvas.height);
 
-                if(this.y  ===  this.width){
+                let numY  =  parseInt(this.y);
+                console.log("numy" + numY);
+                if(numY  === 250){
                     this.y  =  0;
+                   /* console.log("awa ");*/
 
                 }
 
