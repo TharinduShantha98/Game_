@@ -563,8 +563,8 @@
 
         <div id="game">
 
-             <img id="source"
-                  src="assets/images/jet3.png">
+            <img id="source" src="assets/images/jet3.png">
+            <div id="bullet"></div>
 
 
         </div>
@@ -616,20 +616,77 @@
 
 
 
-    class  BulletController{
-        bullets = [];
+    class  Bullet{
+        constructor(x, y, speed, damage) {
 
-        constructor() {
+            this.x = x;
+            this.y = y;
+            this.speed  =  speed;
+            this.damage  =  damage;
+
+            this.width  =  15;
+            this.height  =  50;
+            this.color = "red";
+
         }
 
 
 
+        draw(){
+            $("#bullet").css("position","relative");
+            $("#bullet").css("width",this.width);
+            $("#bullet").css("height",this.height);
+            $("#bullet").css("background-color",this.color);
+
+         /*   this.y -= this.speed;*/
+            $("#bullet").css("top",this.x);
+            $("#bullet").css("left",this.y);
 
 
 
 
+        }
+
+    }
 
 
+
+
+    class BulletController{
+        bullets = [];
+        timerTillNextBullet = 0;
+
+
+
+        constructor(x, y, speed, damage,delay) {
+            this.x = x;
+            this.y = y;
+            this.speed  =  speed;
+            this.damage  =  damage;
+            this.delay  =  delay;
+
+        }
+
+        shoot(){
+
+            if(this.timerTillNextBullet <= 0){
+                console.log("3ndShoot");
+
+                this.bullets.push( new Bullet(this.x, this.y, this.speed, this.damage));
+                this.timerTillNextBullet  =  this.delay;
+            }
+            this.timerTillNextBullet--;
+            this.draw();
+        }
+
+
+        draw(){
+            console.log(this.bullets.length);
+               for(let i =0 ; i < this.bullets.length; i++){
+                   this.bullets[i].draw();
+               }
+
+        }
     }
 
 
@@ -650,13 +707,14 @@
 
 
     class Player{
-        constructor(x,y, groundH, groundW, img) {
+        constructor(x,y, groundH, groundW, img,) {
             this.x =  x;
             this.y =  y;
             this.speed  =  1;
             this.gh = groundH;
             this.gw = groundW;
             this.img  =  img;
+
 
             document.addEventListener("keydown",this.keydown);
             document.addEventListener("keyup",this.keyup);
@@ -667,8 +725,19 @@
 
 
 
-        shoot(){
+        shoot(bulletController){
+            if(this.shootPressed){
+                console.log("shoot");
+               /* let speed  =  1;
+                let delay = 40;
+                let damage  = 1;
+                let bulletX  =  this.x + this.width/2 -2 ;
+                let bulletY =  this.y - 10;*/
+              bulletController.shoot();
 
+
+
+            }
 
 
 
@@ -690,8 +759,9 @@
 
         move(){
             if(this.downPressed){
-                this.y += this.speed;
+
                 if(this.gh > this.y + 80){
+                    this.y += this.speed;
                     $(this.img).css("top", this.y);
 
                 }
@@ -788,6 +858,8 @@
     const playGroundWidth  =  playground.width();
     const playGroundHeight  =  playground.height();
 
+
+    const  bulletController =  new BulletController(pos.left, pos.top,40, 1);
     const player  =  new Player(pos.left, pos.top ,playGroundHeight,playGroundWidth,"#source");
 
 
@@ -795,6 +867,7 @@
 
     function gameLoop() {
         player.move();
+        player.shoot(bulletController);
 
     }
 
