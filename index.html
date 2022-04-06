@@ -693,8 +693,32 @@
     image.src = 'assets/images/jet3.png';
     let player2 =  new CreatePlayer(canvas.width/2.2,canvas.height/1.4,image, canvas.width, canvas.height, bulletController);
 
+    let allEnemy  = [];
+    let enemy1  =  new Enemy(canvas.width/2, canvas.height/2.5, 0.2, 10);
+    let enemy2  =  new Enemy(0, 0, 0.2, 10);
+    let enemy3  =  new Enemy(50, 13, 0.1, 10);
+    let enemy4  =  new Enemy(100, 6, 0.3, 10);
+    let enemy5  =  new Enemy(150, 9, 0.1, 10);
+    let enemy6  =  new Enemy(200, 12, 0.4, 10);
+    let enemy7  =  new Enemy(250, 15, 0.2, 10);
+    let enemy8  =  new Enemy(300, 18, 0.3, 10);
+    let enemy9  =  new Enemy(350, 21, 0.6, 10);
+    let enemy10  =  new Enemy(400, 23, 0.5, 10);
+    let enemy11  =  new Enemy(450, 25, 0.1, 10);
+    allEnemy.push(enemy1);
+    allEnemy.push(enemy2);
+    allEnemy.push(enemy3);
+    allEnemy.push(enemy4);
+    allEnemy.push(enemy5);
+    allEnemy.push(enemy6);
+    allEnemy.push(enemy7);
+    allEnemy.push(enemy8);
+    allEnemy.push(enemy9);
+    allEnemy.push(enemy10);
+    allEnemy.push(enemy11);
 
-    let enemy  =  new Enemy(canvas.width/2, canvas.height/2.5, 0.2, 10);
+
+
 
 
 
@@ -704,10 +728,26 @@
         ctx.fillStyle = "black";
         ctx.fillRect(0,0,canvas.width,canvas.height);
         player2.drawImage(ctx);
-        enemy.drawEnemy(ctx);
+
+        enemy1.drawEnemy(ctx);
+        enemy2.drawEnemy(ctx);
+        enemy3.drawEnemy(ctx);
+        enemy4.drawEnemy(ctx);
+        enemy5.drawEnemy(ctx);
+        enemy6.drawEnemy(ctx);
+        enemy7.drawEnemy(ctx);
+        enemy8.drawEnemy(ctx);
+        enemy9.drawEnemy(ctx);
+        enemy10.drawEnemy(ctx);
+        enemy11.drawEnemy(ctx);
+
+
 
 
     }
+
+
+
 
 
 
