@@ -436,6 +436,24 @@
 
         }
 
+
+
+
+        collideWith(sprite){
+            if(this.x < sprite.x + sprite.width &&
+            this.x + sprite.y > sprite.x &&
+            this.y<sprite.y + sprite.height &&
+            this.y + this.height > sprite.y){
+                 sprite.takeDamage(this.damage);
+
+                 console.log("lt true");
+                 return true;
+            }
+            console.log("lt false");
+            return false;
+
+        }
+
     }
 
     /*============================ End Bullet================================*/
@@ -443,7 +461,7 @@
 
     /*============================Start Enemy ================================*/
         class Enemy{
-            constructor(x,y, speed, health, canvas) {
+            constructor(x,y, speed, health) {
                 this.x  =x;
                 this.y  = y;
                 this.speed  =  speed;
@@ -451,7 +469,7 @@
 
 
                 this.width  =  20;
-                this.heigth  =  30;
+                this.heigth  =  10;
                 this.wait  =  30;
 
 
@@ -460,26 +478,31 @@
 
             drawEnemy(ctx){
                 ctx.fillStyle = "red";
-                ctx.fillRect(this.x, this.y, this.width, this.health);
+                ctx.fillRect(this.x, this.y, this.width, this.heigth);
 
                 this.y = this.y + this.speed;
-                console.log(this.y);
+              /*  console.log(this.y);
                 console.log(this.heigth);
-                console.log(canvas.height);
+                console.log(canvas.height);*/
 
                 let numY  =  parseInt(this.y);
-                console.log("numy" + numY);
+              /*  console.log("numy" + numY);*/
                 if(numY  === 250){
                     this.y  =  0;
                    /* console.log("awa ");*/
 
                 }
 
+            }
 
 
-
+            takeDamage(damage){
+                this.health -= damage;
 
             }
+
+
+
 
 
 
@@ -515,10 +538,10 @@
         }
 
         shoot(x, y, speed , damage, delay){
-            console.log("2ndShoot");
+            // console.log("2ndShoot");
 
             if(this.timerTillNextBullet <= 0){
-                console.log("3ndShoot");
+               // console.log("3ndShoot");
 
                 this.bullets.push( new Bullet(x, y, speed, damage));
                 this.timerTillNextBullet  =  delay;
@@ -532,11 +555,29 @@
 
         draw(ctx){
 
-           console.log(this.bullets.length);
+          // console.log(this.bullets.length);
            this.bullets.forEach((bullet) =>{
                bullet.draw(ctx);
            })
 
+
+
+        }
+
+
+
+        collideWith(sprite){
+                return this.bullets.some((bullet) =>{
+                    if(bullet.collideWith(sprite)){
+                        this.bullets.splice(this.bullets.indexOf(bullet),1);
+                        console.log("bull true")
+                        return true;
+                    }
+                    console.log("bull flase");
+
+                    return false;
+
+                })
 
 
         }
@@ -584,7 +625,7 @@
 
         shoot(){
             if(this.shootPressed){
-                console.log("shoot");
+               // console.log("shoot");
                 let speed  =  1;
                 let delay = 40;
                 let damage  = 1;
@@ -618,8 +659,8 @@
             }
 
             if(this.rightPressed){
-                console.log("ca" + this.canWidth);
-                console.log(this.x);
+               /* console.log("ca" + this.canWidth);
+                console.log(this.x);*/
                 if(this.canWidth > this.x +this.width ){
                     this.x += this.speed;
                 }
@@ -695,16 +736,16 @@
 
     let allEnemy  = [];
     let enemy1  =  new Enemy(canvas.width/2, canvas.height/2.5, 0.2, 10);
-    let enemy2  =  new Enemy(0, 0, 0.2, 10);
-    let enemy3  =  new Enemy(50, 13, 0.1, 10);
-    let enemy4  =  new Enemy(100, 6, 0.3, 10);
-    let enemy5  =  new Enemy(150, 9, 0.1, 10);
-    let enemy6  =  new Enemy(200, 12, 0.4, 10);
-    let enemy7  =  new Enemy(250, 15, 0.2, 10);
-    let enemy8  =  new Enemy(300, 18, 0.3, 10);
-    let enemy9  =  new Enemy(350, 21, 0.6, 10);
-    let enemy10  =  new Enemy(400, 23, 0.5, 10);
-    let enemy11  =  new Enemy(450, 25, 0.1, 10);
+    let enemy2  =  new Enemy(0, 0, 0.2, 1);
+    let enemy3  =  new Enemy(50, 13, 0.1, 1);
+    let enemy4  =  new Enemy(100, 6, 0.3, 1);
+    let enemy5  =  new Enemy(150, 9, 0.1, 1);
+    let enemy6  =  new Enemy(200, 12, 0.4, 1);
+    let enemy7  =  new Enemy(250, 15, 0.2, 1);
+    let enemy8  =  new Enemy(300, 18, 0.3, 1);
+    let enemy9  =  new Enemy(350, 21, 0.6, 1);
+    let enemy10  =  new Enemy(400, 23, 0.5, 1);
+    let enemy11  =  new Enemy(450, 25, 0.1, 1);
     allEnemy.push(enemy1);
     allEnemy.push(enemy2);
     allEnemy.push(enemy3);
@@ -729,17 +770,32 @@
         ctx.fillRect(0,0,canvas.width,canvas.height);
         player2.drawImage(ctx);
 
-        enemy1.drawEnemy(ctx);
-        enemy2.drawEnemy(ctx);
-        enemy3.drawEnemy(ctx);
-        enemy4.drawEnemy(ctx);
-        enemy5.drawEnemy(ctx);
-        enemy6.drawEnemy(ctx);
-        enemy7.drawEnemy(ctx);
-        enemy8.drawEnemy(ctx);
-        enemy9.drawEnemy(ctx);
-        enemy10.drawEnemy(ctx);
-        enemy11.drawEnemy(ctx);
+
+
+        for(let i=0; i<allEnemy.length; i++){
+
+           /* allEnemy[i].drawEnemy(ctx);*/
+                if(bulletController.collideWith(allEnemy[i])){
+                        console.log("1");
+                    if(allEnemy[i].health <= 0){
+                        const index  =   allEnemy.indexOf(allEnemy[i]);
+                        allEnemy.splice(index,1);
+                        console.log("2");
+
+
+                    }else{
+
+                        console.log("3");
+                    }
+                }else {
+                    allEnemy[i].drawEnemy(ctx);
+
+                }
+
+
+        }
+
+
 
 
 
