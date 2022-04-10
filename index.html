@@ -387,18 +387,18 @@
                 ctx.fillStyle = "red";
                 ctx.fillRect(this.x, this.y, this.width, this.heigth);
 
-               /* this.y = this.y + this.speed;*/
-              /*  console.log(this.y);
+                this.y = this.y + this.speed;
+                console.log(this.y);
                 console.log(this.heigth);
-                console.log(canvas.height);*/
+                console.log(canvas.height);
 
-              /*  let numY  =  parseInt(this.y);*/
-              /*  console.log("numy" + numY);*/
-             /*   if(numY  === 250){
+                let numY  =  parseInt(this.y);
+                console.log("numy" + numY);
+                if(numY  === 250){
                     this.y  =  0;
-                   /!* console.log("awa ");*!/
+                   /* console.log("awa ");*/
 
-                }*/
+                }
 
             }
 
@@ -648,6 +648,8 @@
     const  canvas =  document.getElementById("game");
     const ctx  =  canvas.getContext("2d");
 
+    let timeId;
+
 
     let bulletController =  new BulletController(canvas, ctx);
     const image =  new Image(10,20);
@@ -730,10 +732,35 @@
   }
 
 
+  $("#btnStart").click(function () {
+      clearInterval(timeId);
+     timeId =  setInterval(gameLoop,100/60);
+
+  })
+
+
+  $("#btnStop").click(function () {
+
+      clearInterval(timeId);
+
+
+  })
+
+
+
+  $("#btnResume").click(function () {
+
+
+  })
+
+
+
+
+
 
 
    /* gameLoop();*/
-   setInterval(gameLoop,100/60);
+
 
 
 
