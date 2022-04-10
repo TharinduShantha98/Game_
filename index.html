@@ -319,98 +319,6 @@
 
     /*============================player jet ===========================*/
 
-    class Player{
-        constructor(x,y) {
-            this.x  = x;
-            this.y =  y;
-
-            this.width  = 40;
-            this.height  = 20;
-            this.speed  = 1;
-
-            document.addEventListener("keydown",this.keydown);
-            document.addEventListener("keyup",this.keyup);
-
-
-        }
-
-
-        drawPlayer(ctx){
-            this.move();
-            ctx.strokeStyle = "yellow";
-            ctx.fillStyle = "black";
-            ctx.fillRect(this.x, this.y, this.width, this.height);
-            ctx.strokeRect(this.x,this.y,this.width,this.height);
-
-
-
-
-
-        }
-
-        move(){
-            if(this.downPressed){
-                this.y += this.speed;
-            }
-
-            if(this.upPressed){
-                this.y -= this.speed;
-            }
-
-            if(this.leftPressed){
-                this.x -= this.speed;
-            }
-
-            if(this.rightPressed){
-                this.x += this.speed;
-            }
-
-        }
-
-
-
-
-        keydown =(e)=>{
-            if(e.code == "ArrowUp" ){
-                this.upPressed = true;
-
-
-            }
-            if(e.code == "ArrowDown" ){
-                this.downPressed = true;
-            }
-            if(e.code == "ArrowLeft" ){
-                this.leftPressed = true;
-            }
-            if(e.code == "ArrowRight" ){
-                this.rightPressed = true;
-            }
-
-
-        }
-
-
-        keyup =(e)=>{
-            if(e.code == "ArrowUp" ){
-                this.upPressed = false;
-            }
-            if(e.code == "ArrowDown" ){
-                this.downPressed = false;
-            }
-            if(e.code == "ArrowLeft" ){
-                this.leftPressed = false;
-            }
-            if(e.code == "ArrowRight" ){
-                this.rightPressed = false;
-            }
-        }
-
-
-
-
-
-    }
-
     /*============================Bullet================================*/
     class Bullet{
 
@@ -441,15 +349,14 @@
 
         collideWith(sprite){
             if(this.x < sprite.x + sprite.width &&
-            this.x + sprite.y > sprite.x &&
-            this.y<sprite.y + sprite.height &&
+            this.x + this.width > sprite.x &&
+           /* this.y < sprite.y + sprite.height &&*/
             this.y + this.height > sprite.y){
                  sprite.takeDamage(this.damage);
-
-                 console.log("lt true");
-                 return true;
+                 console.log("it true");
+                 return true; 
             }
-            console.log("lt false");
+            console.log("it false");
             return false;
 
         }
@@ -480,18 +387,18 @@
                 ctx.fillStyle = "red";
                 ctx.fillRect(this.x, this.y, this.width, this.heigth);
 
-                this.y = this.y + this.speed;
+               /* this.y = this.y + this.speed;*/
               /*  console.log(this.y);
                 console.log(this.heigth);
                 console.log(canvas.height);*/
 
-                let numY  =  parseInt(this.y);
+              /*  let numY  =  parseInt(this.y);*/
               /*  console.log("numy" + numY);*/
-                if(numY  === 250){
+             /*   if(numY  === 250){
                     this.y  =  0;
-                   /* console.log("awa ");*/
+                   /!* console.log("awa ");*!/
 
-                }
+                }*/
 
             }
 
@@ -556,9 +463,17 @@
         draw(ctx){
 
           // console.log(this.bullets.length);
-           this.bullets.forEach((bullet) =>{
+         /*  this.bullets.forEach((bullet) =>{
                bullet.draw(ctx);
-           })
+           })*/
+
+            this.bullets.forEach((bullet) => {
+                if (this.isBulletOffScreen(bullet)) {
+                    const index = this.bullets.indexOf(bullet);
+                    this.bullets.splice(index, 1);
+                }
+                bullet.draw(ctx);
+            });
 
 
 
@@ -573,13 +488,18 @@
                         console.log("bull true")
                         return true;
                     }
-                    console.log("bull flase");
+                    console.log("bull false");
 
                     return false;
 
                 })
 
 
+        }
+
+
+        isBulletOffScreen(bullet) {
+            return bullet.y <= -bullet.height;
         }
 
 
@@ -803,27 +723,14 @@
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   function setCommonStyle(){
       ctx.shadowColor = "#d9846f";
       ctx.shadowBlur = 2;
 
-
-
   }
+
+
+
 
    /* gameLoop();*/
    setInterval(gameLoop,100/60);
